@@ -18,7 +18,6 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
 
-    //TODO: on delete set null
     @JsonIgnore
     @Comment("최초 생성자 user id")
     @JoinColumn(name="first_created_user_id",nullable = true)
@@ -26,7 +25,6 @@ public class BaseEntity {
     @CreatedBy
     private User createdBy;
 
-    //TODO: on delete set null
     @JsonIgnore
     @Comment("최종 수정자 user id")
     @JoinColumn(name="last_modified_user_id",nullable = true)

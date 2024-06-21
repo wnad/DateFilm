@@ -44,6 +44,10 @@ public class User extends BaseEntity {
     @Column(name="nickname", nullable = false)
     private String nickname;
 
+    @Comment(value = "유저 닉네임 태그")
+    @Column(name="tag", nullable = false)
+    private int tag;
+
     @Comment(value = "유저 성별")
     @Column(name="gender", nullable = false)
     private String gender;
