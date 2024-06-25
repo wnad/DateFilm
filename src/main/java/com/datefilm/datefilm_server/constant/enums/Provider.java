@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 @AllArgsConstructor
 public enum Provider implements Constant<Provider> {
-    EMAIL, KAKAO, NAVER, APPLE, GOOGLE;
+    EMAIL("이메일"), KAKAO("카카오"), NAVER("네이버"), APPLE("애플"), GOOGLE("구글");
 
     private final String label;
 

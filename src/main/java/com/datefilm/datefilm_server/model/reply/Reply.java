@@ -15,6 +15,7 @@ import org.hibernate.annotations.Comment;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "reply")
 public class Reply extends BaseEntity {
 
     @Id

@@ -29,7 +29,7 @@ public enum BaseResponseCode {
     public static BaseResponseCode findByCode(String code) {
         return Arrays.stream(BaseResponseCode.values())
                 .filter(b -> b.getCode().equals(code))
-                .findAny().orElseThrow(BaseException::new);
+                .findAny().orElseThrow(() -> new BaseException(BAD_REQUEST));
     }
 
 }

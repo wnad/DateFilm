@@ -12,6 +12,7 @@ import org.hibernate.annotations.Comment;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "notification")
 public class Notification extends BaseEntity {
 
     @Id

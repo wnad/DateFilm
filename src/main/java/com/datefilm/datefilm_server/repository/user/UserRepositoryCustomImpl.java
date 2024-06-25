@@ -2,14 +2,19 @@ package com.datefilm.datefilm_server.repository.user;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import static com.datefilm.datefilm_server.model.user.QUser.user;
 
+@Slf4j
 @Repository
+@RequiredArgsConstructor
 public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
+
 
     @Override
     public int getLastTagForSameNickname(String nickname) {
