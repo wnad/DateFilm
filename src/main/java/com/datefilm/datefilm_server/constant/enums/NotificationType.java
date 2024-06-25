@@ -9,7 +9,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum NotificationType implements Constant<NotificationType>{
 
-    RECORD("기록"), REPLY("댓글"), ALBUM("앨범");
+    RECORD("기록"), REPLY("댓글");
     private final String label;
 
     @JsonValue
