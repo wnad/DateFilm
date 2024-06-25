@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import java.util.Arrays;
 
 @Getter
+@Setter
 @AllArgsConstructor
 public enum BaseResponseCode {
 
