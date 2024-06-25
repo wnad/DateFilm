@@ -1,0 +1,47 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+      force-response: true
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+      location: /media
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ENC(0o8LoNxTufrutTzx4m07wDEwWHJduwQ3m1EY7hYZXx6UdaZsgKpJzc7nOr0E0u+lYsO/ES05PY5/sFoMkGhKC84+7fpGdHoB53h6or2zUbXbuMQeg6a50YQR2WRjs942nuCVaHHwE3yX5rCZ2fRB4cwES+xJXRGjpdYX0uWBnEpnuGqu1QqZqA==)
+    username: ENC(bhE9PcvNENaMyfTkocygy1chSyVtBt3p)
+    password: ENC(8Ut1lBhirqDD0CCQhps9eeBE6GubI7oz3W6wi9IIktM=)
+
+  sql:
+    init:
+      platform: mysql
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  profiles:
+    include: secret
+    default : dev
+
+  task:
+    scheduling:
+      pool:
+        size: 10
+
+springdoc:
+  swagger-ui:
+    operations-sorter: method
+    tags-sorter: alpha

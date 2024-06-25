@@ -7,9 +7,9 @@ import lombok.AllArgsConstructor;
 import java.util.Arrays;
 
 @AllArgsConstructor
-public enum NotificationType implements Constant<NotificationType>{
+public enum Provider implements Constant<Provider> {
+    EMAIL("이메일"), KAKAO("카카오"), NAVER("네이버"), APPLE("애플"), GOOGLE("구글");
 
-    RECORD("기록"), REPLY("댓글");
     private final String label;
 
     @JsonValue
@@ -20,7 +20,7 @@ public enum NotificationType implements Constant<NotificationType>{
 
     @JsonCreator
     @Override
-    public NotificationType findByLabel(String label) {
+    public Provider findByLabel(String label) {
         return Arrays.stream(values())
                 .filter(value->value.label.equals(label))
                 .findAny()
