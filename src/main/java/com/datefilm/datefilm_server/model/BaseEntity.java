@@ -1,4 +1,4 @@
-package com.datefilm.datefilm_server.model.base;
+package com.datefilm.datefilm_server.model;
 
 import com.datefilm.datefilm_server.model.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;

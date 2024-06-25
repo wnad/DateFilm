@@ -1,6 +1,6 @@
 package com.datefilm.datefilm_server.model.user;
 
-import com.datefilm.datefilm_server.model.base.BaseEntity;
+import com.datefilm.datefilm_server.model.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;

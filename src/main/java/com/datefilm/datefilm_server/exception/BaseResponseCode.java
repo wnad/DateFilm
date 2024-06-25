@@ -1,9 +1,7 @@
 package com.datefilm.datefilm_server.exception;
 
-import com.ulisesbocchio.jasyptspringboot.annotation.EncryptablePropertySource;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
 import java.util.Arrays;

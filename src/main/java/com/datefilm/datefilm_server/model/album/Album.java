@@ -1,6 +1,6 @@
 package com.datefilm.datefilm_server.model.album;
 
-import com.datefilm.datefilm_server.model.base.BaseEntity;
+import com.datefilm.datefilm_server.model.BaseEntity;
 import com.datefilm.datefilm_server.model.user.Couple;
 import com.datefilm.datefilm_server.model.user.User;
 import jakarta.persistence.*;

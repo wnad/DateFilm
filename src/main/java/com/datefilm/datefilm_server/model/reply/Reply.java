@@ -1,7 +1,7 @@
 package com.datefilm.datefilm_server.model.reply;
 
 import com.datefilm.datefilm_server.model.album.Album;
-import com.datefilm.datefilm_server.model.base.BaseEntity;
+import com.datefilm.datefilm_server.model.BaseEntity;
 import com.datefilm.datefilm_server.model.record.Record;
 import com.datefilm.datefilm_server.model.user.User;
 import jakarta.persistence.*;
