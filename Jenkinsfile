@@ -24,7 +24,7 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'datefilm_spring_secret', variable: 'dbConfigFile')]) {
                     script {
-                        sh "cp ${dbConfigFile} ./DateFilm/src/main/resources/application-secret.yml"
+                        sh "cp ${dbConfigFile} ./DateFilm/src/main/resources/application-secret.yaml"
                     }
                 }
             }
