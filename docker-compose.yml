@@ -11,7 +11,7 @@ services:
 #    command: redis-server /usr/local/conf/redis.conf # 실행할 명령
 
   spring_application:
-    image: datefilm_spring
+    image: choswan/datefilm_spring:1.0
     container_name: datefilm
     ports:
       - 8080:8080		# 서버 port
