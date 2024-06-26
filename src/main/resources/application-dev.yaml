@@ -1,0 +1,26 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  jpa:
+    #    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    devtools:
+      livereload:
+        enabled: true
+
+log:
+  config:
+    path: ../api_logs
+    filename: app-dev
+    totalSizeCap: 500MB
+  level:
+    org.hibernate.type: info
+#    com.zaxxer.hikari.HikariConfig: trace
+#    com.zaxxer.hikari: trace
+
+decorator.datasource.p6spy.enable-logging: true

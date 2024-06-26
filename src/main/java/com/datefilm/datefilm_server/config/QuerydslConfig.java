@@ -22,7 +22,6 @@ public class QuerydslConfig {
         QRecord record = QRecord.record;
         QReply reply = QReply.reply;
 
-//        log.info("[QuerydslConfig] qtype 초기화 완료");
     }
 
     @Bean
