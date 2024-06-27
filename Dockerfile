@@ -1,6 +1,6 @@
 # 프로젝트 Java 버전에 맞는 openjdk 이미지 설정
 # 베이스 이미지로 Java 17버전이 포함된 Docker 이미지를 사용
-FROM openjdk:17-jdk-slim
+FROM openjdk:17-jdk
 
 # Gradle을 사용해 빌드를 실행하는 명령어
 CMD ["./gradlew", "clean", "build"]
