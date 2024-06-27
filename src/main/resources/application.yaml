@@ -34,7 +34,7 @@ spring:
 
   profiles:
     include: secret
-    default: dev
+#    default: dev
 
 
   task:

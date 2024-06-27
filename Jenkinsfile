@@ -27,6 +27,18 @@ pipeline {
             }
         }
 
+        stage('Verify secret.yml') {
+            steps {
+                script {
+                    def targetDir = "$WORKSPACE/DateFilm/src/main/resources/"
+                    def result = sh(script: "ls -la ${targetDir} | grep application-secret.yaml", returnStatus: true)
+                    if (result != 0) {
+                        error("application-secret.yaml 파일이 존재하지 않습니다.")
+                    }
+                }
+            }
+        }
+
         stage('spring build, docker image build') {
             steps {
                 sh "chmod +x ./gradlew"
@@ -108,7 +120,7 @@ pipeline {
                                             git checkout infra/2-jenkins-docker &&
                                             git pull origin infra/2-jenkins-docker &&
                                             echo \${DOCKERHUB_PASSWORD} | docker login -u \${DOCKERHUB_USERNAME} --password-stdin &&
-                                            docker-compose -f docker-compose.yml up -d --build
+                                            docker-compose -f docker-compose.yml up -d
                                             """
                                         )
                                     ],

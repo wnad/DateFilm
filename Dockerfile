@@ -20,7 +20,7 @@ EXPOSE 8080
 ENTRYPOINT ["java","-jar","/app.jar"]
 
 # .yaml local/prod 프로필 분리 구조일때 실행할 프로필 지정 dev(=개발)
-ENV USE_PROFILE dev
+# ENV USE_PROFILE dev
 
 # 이미지 빌드 명령
 ENTRYPOINT ["java", "-Dspring.profiles.active=${USE_PROFILE}", "-jar", "app.jar"]
