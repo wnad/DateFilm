@@ -11,5 +11,4 @@ COPY ${JAR_FILE} app.jar
 # ENV USE_PROFILE dev
 
 # 이미지 빌드 명령
-# "-Dspring.profiles.active=${USE_PROFILE}"
 ENTRYPOINT ["java", "-jar", "app.jar"]
