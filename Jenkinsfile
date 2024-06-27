@@ -4,48 +4,41 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'choswan/datefilm_spring'
         DOCKERHUB_CREDENTIALS = 'docker_hub_choswan'
-        SYS_VERSION = '1.0'
+        SYS_VERSION = '1.1.4'
         S510UN_SERVER = 's510un'
     }
 
     stages {
+        // git pull
         stage('git_checkout') {
             steps {
-                git branch: 'infra/2-jenkins-docker', credentialsId: 'github_wnad_pull', url: 'https://github.com/wnad/DateFilm.git'
+                git branch: 'develop', credentialsId: 'github_wnad_pull', url: 'https://github.com/wnad/DateFilm.git'
             }
         }
 
-        stage('secret.yml download') {
+
+        // datefilm_spring_secret 복사
+        stage('copy secret-yaml') {
             steps {
-                withCredentials([file(credentialsId: 'datefilm_spring_secret', variable: 'dbConfigFile')]) {
+                withCredentials([file(credentialsId: 'datefilm_spring_secret', variable: 'secretFile')]) {
                     script {
-                        def targetDir = "$WORKSPACE/DateFilm/src/main/resources/"
-                        sh "mkdir -p ${targetDir}"
-                        sh "cp ${dbConfigFile} ${targetDir}application-secret.yaml"
+                        sh "cp $secretFile ./src/main/resources/application-secret.yaml"
                     }
                 }
             }
         }
 
-        stage('Verify secret.yml') {
-            steps {
-                script {
-                    def targetDir = "$WORKSPACE/DateFilm/src/main/resources/"
-                    def result = sh(script: "ls -la ${targetDir} | grep application-secret.yaml", returnStatus: true)
-                    if (result != 0) {
-                        error("application-secret.yaml 파일이 존재하지 않습니다.")
-                    }
-                }
-            }
-        }
 
-        stage('spring build, docker image build') {
+        // jar build
+        stage('spring build') {
             steps {
                 sh "chmod +x ./gradlew"
                 sh "./gradlew clean build"
             }
         }
 
+
+        // 도커 이미지 빌드
         stage('Build Docker Image') {
             steps {
                 script {
@@ -55,13 +48,16 @@ pipeline {
         }
 
 
+        // 새 이미지 도커 허브에 push
         stage('Push Docker Image to Docker Hub') {
             steps {
                 script {
+                    // 도커 로그인
                     withCredentials([usernamePassword(credentialsId: env.DOCKERHUB_CREDENTIALS, passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
                         sh "echo \${DOCKERHUB_PASSWORD} | docker login -u \${DOCKERHUB_USERNAME} --password-stdin"
                     }
 
+                    // 도커 레포지토리에 이미지 push
                     docker.withRegistry('', env.DOCKERHUB_CREDENTIALS) {
                         docker.image("${env.DOCKER_IMAGE}:${env.SYS_VERSION}").push()
                     }
@@ -69,6 +65,8 @@ pipeline {
             }
         }
 
+
+        // 생성한 이미지 삭제
         stage('Remove Docker Image') {
             steps {
                 script {
@@ -77,6 +75,8 @@ pipeline {
             }
         }
 
+
+        // 원격 서버에 올라가있는 컨테이너 중지, 삭제
         stage('Docker Clean Up') {
             steps {
                 script {
@@ -87,10 +87,10 @@ pipeline {
                                 transfers: [
                                     sshTransfer(
                                         execCommand: '''
-                                        if docker ps -a | grep "datefilm_spring"; then
-                                            docker stop $(docker ps -aq --filter ancestor=datefilm_spring)
-                                            docker rm $(docker ps -aq --filter ancestor=datefilm_spring)
-                                            docker rmi datefilm_spring
+                                        if docker ps -a | grep "datefilm"; then
+                                            docker stop datefilm
+                                            docker rm datefilm
+                                            docker rmi datefilm
                                         fi
                                         '''
                                     )
@@ -117,9 +117,9 @@ pipeline {
                                         sshTransfer(
                                             execCommand: """
                                             cd /home/dundun/project/datefilm/datefilm_git/ &&
-                                            git checkout infra/2-jenkins-docker &&
-                                            git pull origin infra/2-jenkins-docker &&
-                                            echo \${DOCKERHUB_PASSWORD} | docker login -u \${DOCKERHUB_USERNAME} --password-stdin &&
+                                            git checkout develop &&
+                                            git pull origin develop && clear &&
+                                            echo \${DOCKERHUB_PASSWORD} | docker login -u \${DOCKERHUB_USERNAME} --password-stdin
                                             docker-compose -f docker-compose.yml up -d
                                             """
                                         )
