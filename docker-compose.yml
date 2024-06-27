@@ -1,0 +1,7 @@
+services:
+  spring_application:
+    image: choswan/datefilm_spring:1.1.4
+    container_name: datefilm
+    ports:
+      - 8080:8080		# 서버 port
+      - 443:443	 		# https 인증 port
