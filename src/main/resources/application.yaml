@@ -13,8 +13,6 @@ server:
       location: /media
 
 spring:
-  config:
-    import: optional:file:.env[.properties]
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ENC(0o8LoNxTufrutTzx4m07wDEwWHJduwQ3m1EY7hYZXx6UdaZsgKpJzc7nOr0E0u+lYsO/ES05PY5/sFoMkGhKC84+7fpGdHoB53h6or2zUbXbuMQeg6a50YQR2WRjs942nuCVaHHwE3yX5rCZ2fRB4cwES+xJXRGjpdYX0uWBnEpnuGqu1QqZqA==)
@@ -47,7 +45,7 @@ springdoc:
     operations-sorter: method
     tags-sorter: alpha
 
-jasypt:
-  encryptor:
-    bean: jasyptSpringEncryptor
-    password: ${JASYPT_ENCRYPTOR_PASSWORD}
+#jasypt:
+#  encryptor:
+#    bean: jasyptSpringEncryptor
+#    password: ${JASYPT_ENCRYPTOR_PASSWORD}
