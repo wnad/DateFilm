@@ -4,11 +4,12 @@ FROM openjdk:17-jdk
 
 # Gradle로 빌드한 jar 파일의 위치를 변수로 설정
 # gradle 빌드를 하면 build/libs 하위에 *.jar 생성됨. 해당 '*.jar'를 'app.jar'로 cpoy
-ARG JAR_FILE=build/libs/datefilm_server-0.0.1-SNAPSHOT.jar
-COPY ${JAR_FILE} datefilm_server.jar
+ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} app.jar
 
 # .yaml local/prod 프로필 분리 구조일때 실행할 프로필 지정 dev(=개발)
-ENV USE_PROFILE dev
+# ENV USE_PROFILE dev
 
 # 이미지 빌드 명령
-ENTRYPOINT ["java", "-Dspring.profiles.active=${USE_PROFILE}", "-jar", "datefilm_server.jar"]
+# "-Dspring.profiles.active=${USE_PROFILE}"
+ENTRYPOINT ["java", "-jar", "app.jar"]
