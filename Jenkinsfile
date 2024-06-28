@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'choswan/datefilm_spring'
         DOCKERHUB_CREDENTIALS = 'docker_hub_choswan'
-        SYS_VERSION = '1.1.4'
+        SYS_VERSION = '1.1.5'
         S510UN_SERVER = 's510un'
     }
 
@@ -52,12 +52,10 @@ pipeline {
         stage('Push Docker Image to Docker Hub') {
             steps {
                 script {
-                    // 도커 로그인
                     withCredentials([usernamePassword(credentialsId: env.DOCKERHUB_CREDENTIALS, passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
                         sh "echo \${DOCKERHUB_PASSWORD} | docker login -u \${DOCKERHUB_USERNAME} --password-stdin"
                     }
 
-                    // 도커 레포지토리에 이미지 push
                     docker.withRegistry('', env.DOCKERHUB_CREDENTIALS) {
                         docker.image("${env.DOCKER_IMAGE}:${env.SYS_VERSION}").push()
                     }
@@ -76,7 +74,7 @@ pipeline {
         }
 
 
-        // 원격 서버에 올라가있는 컨테이너 중지, 삭제
+        // 원격 서버에
         stage('Docker Clean Up') {
             steps {
                 script {
@@ -118,7 +116,8 @@ pipeline {
                                             execCommand: """
                                             cd /home/dundun/project/datefilm/datefilm_git/ &&
                                             git checkout develop &&
-                                            git pull origin develop && clear &&
+                                            git pull origin develop &&
+                                            clear &&
                                             echo \${DOCKERHUB_PASSWORD} | docker login -u \${DOCKERHUB_USERNAME} --password-stdin
                                             docker-compose -f docker-compose.yml up -d
                                             """
