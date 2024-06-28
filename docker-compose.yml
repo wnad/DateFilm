@@ -1,6 +1,6 @@
 services:
   spring_application:
-    image: choswan/datefilm_spring:1.1.4
+    image: choswan/datefilm_spring:1.1.5
     container_name: datefilm_spring
     ports:
       - 8080:8080		# 서버 port

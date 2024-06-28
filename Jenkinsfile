@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'choswan/datefilm_spring'
         DOCKERHUB_CREDENTIALS = 'docker_hub_choswan'
-        SYS_VERSION = '1.1.4'
+        SYS_VERSION = '1.1.5'
         S510UN_SERVER = 's510un'
     }
 
@@ -12,7 +12,7 @@ pipeline {
         // git pull
         stage('git_checkout') {
             steps {
-                git branch: 'develop', credentialsId: 'github_wnad_pull', url: 'https://github.com/wnad/DateFilm.git'
+                git branch: 'infra/2-jenkins-docker', credentialsId: 'github_wnad_pull', url: 'https://github.com/wnad/DateFilm.git'
             }
         }
 
@@ -117,8 +117,8 @@ pipeline {
                                         sshTransfer(
                                             execCommand: """
                                             cd /home/dundun/project/datefilm/datefilm_git/ &&
-                                            git checkout develop &&
-                                            git pull origin develop && clear &&
+                                            git checkout infra/2-jenkins-docker &&
+                                            git pull origin infra/2-jenkins-docker && clear &&
                                             echo \${DOCKERHUB_PASSWORD} | docker login -u \${DOCKERHUB_USERNAME} --password-stdin
                                             docker-compose -f docker-compose.yml up -d
                                             """
