@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'choswan/datefilm_spring'
         DOCKERHUB_CREDENTIALS = 'docker_hub_choswan'
-        SYS_VERSION = '1.1.5'
+        SYS_VERSION = '1.1.6'
         S510UN_SERVER = 's510un'
     }
 
@@ -85,10 +85,10 @@ pipeline {
                                 transfers: [
                                     sshTransfer(
                                         execCommand: '''
-                                        if docker ps -a | grep "datefilm"; then
-                                            docker stop datefilm
-                                            docker rm datefilm
-                                            docker rmi datefilm
+                                        if docker ps -a | grep "datefilm_spring"; then
+                                            docker stop datefilm_spring
+                                            docker rm datefilm_spring
+                                            docker rmi datefilm_spring
                                         fi
                                         '''
                                     )
