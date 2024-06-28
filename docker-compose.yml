@@ -1,5 +1,5 @@
 services:
-  spring_application:
+  datefilm_spring:
     image: choswan/datefilm_spring:1.1.5
     container_name: datefilm_spring
     ports:
