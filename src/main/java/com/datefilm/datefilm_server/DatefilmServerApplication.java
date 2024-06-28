@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-@OpenAPIDefinition(servers = {@Server(url="/api",description = "스프링부트 context path")})
+@OpenAPIDefinition(servers = {@Server(url="/",description = "스프링부트")})
 @EnableJpaAuditing
 @SpringBootApplication
 public class DatefilmServerApplication {
