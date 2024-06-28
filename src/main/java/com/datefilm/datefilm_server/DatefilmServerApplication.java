@@ -12,8 +12,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 public class DatefilmServerApplication {
 
     public static void main(String[] args) {
-
-
         SpringApplication.run(DatefilmServerApplication.class, args);
     }
 
